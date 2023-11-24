@@ -28,3 +28,55 @@ import tensorflow as tf
 from tensorflow import keras
 import matplotlib.pyplot as plt
 import time
+
+class DeepNeuralNetwork:
+    def __init__(self, num_epoch, num_iter_per_epoch, batch_size, learning_rate, layer_size, neuron_num_per_layer):
+        self.num_epoch = num_epoch
+        self.num_iter_per_epoch = num_iter_per_epoch
+        self.batch_size = batch_size
+        self.learning_rate = learning_rate
+        self.layer_size = layer_size
+        self.neuron_num_per_layer = neuron_num_per_layer
+
+    def initialise_he(self, size, num_inputs):
+        pass
+    
+    def initialise_weights(self, n, layer_size):
+        pass
+
+    def initialise_variables(self):
+        pass
+
+    @tf.function
+    def dnn(self, x, p, act):
+        pass
+
+    def d_dnn(self, x, p, act, component):
+        pass
+
+    def dd_dnn(self, x, p, act, component):
+        pass
+
+    @tf.function
+    def model_grad(self, x, parameters, act):
+        pass
+
+    def plot_dnn(self, p, act):
+        pass
+
+
+if __name__ == "__main__":
+    num_epochs = 50
+    num_iter_per_epoch = 10
+    batch_size = 100
+
+    learning_rate = .01
+    layer_size = 5
+    neuron_num_per_layer = 50
+
+    dnn = DeepNeuralNetwork(num_epochs, num_iter_per_epoch, batch_size, learning_rate, layer_size, neuron_num_per_layer)
+
+    activation_fn = [{'f': tf.sin, 'df': tf.cos, 'ddf': lambda x: -tf.sin(x)} for _ in range(dnn.layer_size - 1)]
+    parameters = dnn.initialise_weights(neuron_num_per_layer, layer_size)
+
+    iteration, ave_grad, ave_sqgrad = dnn.initialise_variables()
