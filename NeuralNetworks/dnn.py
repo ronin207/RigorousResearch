@@ -38,8 +38,23 @@ class DeepNeuralNetwork:
         self.layer_size = layer_size
         self.neuron_num_per_layer = neuron_num_per_layer
 
+    """
+    DNN weights are initialised using the He initialisation method. 
+    He initialisation method is known to be better suited for activation functions
+    that are not symmetric around 0, such as the ReLU activation function. 
+    The initialisation method sets the weight to be normally distributed with mean 0 and variance 2/n,
+    where n is the number of inputs to the layer.
+
+    Parameters:
+        size (int): number of neurons in the layer
+        num_inputs (int): number of inputs to the layer
+
+    Returns:
+        weights (tf.Variable): initialised weights
+    """
     def initialise_he(self, size, num_inputs):
-        pass
+        weights = np.random.randn(size, num_inputs) * np.sqrt(2 / num_inputs)
+        return tf.Variable(weights, dtype=tf.float32)
     
     def initialise_weights(self, n, layer_size):
         pass
