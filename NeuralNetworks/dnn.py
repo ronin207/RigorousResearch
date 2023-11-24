@@ -21,3 +21,10 @@ The network is trained using the following parameters:
     neuron_num_per_layer: number of neurons in each layer except the output layer
     activation: activation function for the hidden layers except the output layer using the sine function, and it's first and second derivative. 
 """
+
+# Import libraries
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+import matplotlib.pyplot as plt
+import time
