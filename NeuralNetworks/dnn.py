@@ -59,8 +59,20 @@ class DeepNeuralNetwork:
     def initialise_weights(self, n, layer_size):
         pass
 
+    """
+    Initialise the iteration count, average gradient and average squared gradient.
+
+    Returns:
+        iteration (int): iteration count
+        ave_grad (list): average gradient
+        ave_sqgrad (list): average squared gradient
+    """
     def initialise_variables(self):
-        pass
+        iteration = 0
+        ave_grad = []
+        ave_sqgrad = []
+
+        return iteration, ave_grad, ave_sqgrad
 
     @tf.function
     def dnn(self, x, p, act):
