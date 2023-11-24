@@ -72,7 +72,7 @@ class DeepNeuralNetwork:
         ave_grad = []
         ave_sqgrad = []
 
-        return iteration, ave_grad, ave_sqgrad
+        return iteration, ave_grad, ave_sqgrad 
 
     """
     Computes the forward propagation of the neural network. 
