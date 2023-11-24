@@ -74,9 +74,33 @@ class DeepNeuralNetwork:
 
         return iteration, ave_grad, ave_sqgrad
 
+    """
+    Computes the forward propagation of the neural network. 
+    The hidden layers are created using fully connected layers 
+    with the specified number of neurons and activation function.
+    The activation function utilises the sine function, and it's first and second derivative.
+
+    Parameters:
+        x (tf.Tensor): input
+        p (list): DNN parameters
+        act (list): activation function for each layer
+
+    Returns:
+        x (tf.Tensor): DNN output
+    """
     @tf.function
     def dnn(self, x, p, act):
-        pass
+        model = keras.models.Sequential()
+
+        model.add(keras.layers.Dense(self.neuron_num_per_layer, activation=act[0]['f'], input_shape=(1,)))
+
+        for i in range(self.layer_size - 2):
+            model.add(keras.layers.Dense(self.neuron_num_per_layer, activation=act[i+1]['f']))
+
+        model.add(keras.layers.Dense(1, activation=act[len(p)-1]['f']))
+        x = model(x)
+        
+        return x
 
     def d_dnn(self, x, p, act, component):
         pass
