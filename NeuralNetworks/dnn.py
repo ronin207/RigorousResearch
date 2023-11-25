@@ -81,10 +81,7 @@ class DeepNeuralNetwork:
         weights_matrices.append(self.initialise_he([1, n], n))
         biases_vectors.append(tf.Variable(np.zeros(1, 1), dtype=tf.float32))
 
-        for weights_matrix, biases_vector in zip(weights_matrices, biases_vectors):
-            p.append({'weights': weights_matrix, 'biases': biases_vector})
-
-        return p
+        return list(zip(weights_matrices, biases_vectors))
 
     """
     Initialise the iteration count, average gradient and average squared gradient.
