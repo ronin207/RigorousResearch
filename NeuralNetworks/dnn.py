@@ -151,9 +151,35 @@ class DeepNeuralNetwork:
 
         return res
 
+    """
+    Computes the gradient of the loss function with respect to the DNN parameters.
+
+    Parameters:
+        x (tf.Tensor): input
+        parameters (list): DNN parameters
+        act (list): activation function for each layer
+
+    Returns:
+        gradients (list): gradient of the loss function with respect to the DNN parameters
+    """
     @tf.function
     def model_grad(self, x, parameters, act):
-        pass
+        ddu = self.dd_dnn(x, parameters, act, 1)
+        u = self.dnn(x, parameters, act)
+
+        BC0 = self.dnn(tf.constant(0, dtype=tf.float32), parameters, act)
+        BC1 = self.dnn(tf.constant(1, dtype=tf.float32), parameters, act)
+
+        c = 10
+        lam = 300
+
+        with tf.GradientTape() as tape:
+            tape.watch(x)
+            loss = tf.reduce_sum(tf.square(ddu + lam*(u - tf.pow(u,3)))) / len(x) + c*tf.square(BC0) + c*tf.square(BC1)
+
+        gradients = tape.gradient(loss, parameters)
+
+        return gradients
 
     def plot_dnn(self, p, act):
         pass
