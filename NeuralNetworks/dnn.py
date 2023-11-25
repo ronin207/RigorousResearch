@@ -46,7 +46,7 @@ class DeepNeuralNetwork:
     where n is the number of inputs to the layer.
 
     Parameters:
-        size (array): matrix size of the layer
+        size (int): number of neurons in the layer
         num_inputs (int): number of inputs to the layer
 
     Returns:
