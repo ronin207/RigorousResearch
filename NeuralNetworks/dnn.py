@@ -53,8 +53,8 @@ class DeepNeuralNetwork:
         weights (tf.Variable): initialised weights
     """
     def initialise_he(self, size, num_inputs):
-        weights = np.random.randn(size) * np.sqrt(2 / num_inputs)
-        return tf.Variable(weights, dtype=tf.float32)
+        weights = tf.random.truncated_normal(size, stddev=sqrt(2/num_inputs))
+        return tf.convert_to_tensors(weights, dtype=tf.float32)
     
     def initialise_weights(self, n, layer_size):
         pass
