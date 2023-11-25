@@ -46,14 +46,14 @@ class DeepNeuralNetwork:
     where n is the number of inputs to the layer.
 
     Parameters:
-        size (int): number of neurons in the layer
+        size (array): matrix size of the layer
         num_inputs (int): number of inputs to the layer
 
     Returns:
         weights (tf.Variable): initialised weights
     """
     def initialise_he(self, size, num_inputs):
-        weights = np.random.randn(size, num_inputs) * np.sqrt(2 / num_inputs)
+        weights = np.random.randn(size) * np.sqrt(2 / num_inputs)
         return tf.Variable(weights, dtype=tf.float32)
     
     def initialise_weights(self, n, layer_size):
@@ -93,5 +93,7 @@ if __name__ == "__main__":
 
     activation_fn = [{'f': tf.sin, 'df': tf.cos, 'ddf': lambda x: -tf.sin(x)} for _ in range(dnn.layer_size - 1)]
     parameters = dnn.initialise_weights(neuron_num_per_layer, layer_size)
+
+    print(parameters)
 
     iteration, ave_grad, ave_sqgrad = dnn.initialise_variables()
