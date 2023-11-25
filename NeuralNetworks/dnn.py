@@ -72,14 +72,14 @@ class DeepNeuralNetwork:
         biases_vectors = []
 
         weights_matrices.append(self.initialise_he([n, 1], 1))
-        biases_vectors.append(tf.Variable(np.zeros(n, 1), dtype=tf.float32))
+        biases_vectors.append(tf.Variable(np.zeros((n, 1)), dtype=tf.float32))
 
         for i in range(layer_size - 2):
             weights_matrices.append(self.initialise_he([n, n], n))
-            biases_vectors.append(tf.Variable(np.zeros(n, 1), dtype=tf.float32))
+            biases_vectors.append(tf.Variable(np.zeros((n, 1)), dtype=tf.float32))
 
         weights_matrices.append(self.initialise_he([1, n], n))
-        biases_vectors.append(tf.Variable(np.zeros(1, 1), dtype=tf.float32))
+        biases_vectors.append(tf.Variable(np.zeros((1, 1)), dtype=tf.float32))
 
         return list(zip(weights_matrices, biases_vectors))
 
