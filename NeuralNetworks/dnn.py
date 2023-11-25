@@ -144,7 +144,7 @@ class DeepNeuralNetwork:
             return res
 
         if len(p) > len(act):
-            res = tf.matmul(p[-1].weights, self.dd_dnn(x, p[:-1], act, component))
+            res = tf.matmul(p[-1][0], self.dd_dnn(x, p[:-1], act, component))
         elif len(p) <= len(act):
             res = tf.matmul(act[-1]['ddf'](self.dnn(x, p, act[:-1])), tf.square(self.d_dnn(x, p, act[:-1], component))) \
                 + act[-1]['df'](self.dnn(x, p, act[:-1])) * self.dd_dnn(x, p, act[:-1], component)
