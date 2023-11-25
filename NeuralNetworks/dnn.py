@@ -102,8 +102,29 @@ class DeepNeuralNetwork:
         
         return x
 
+    """
+    Computes the derivative of the DNN output with respect to a specified component of the input.
+
+    Parameters:
+        x (tf.Tensor): input
+        p (list): DNN parameters
+        act (list): activation function for each layer
+        component (int): component of the input to compute the derivative with respect to
+
+    Returns:
+        d (tf.Tensor): derivative of the DNN output with respect to a specified component of the input
+    """
     def d_dnn(self, x, p, act, component):
-        pass
+        if not act and len(act) == 1:
+            res = p[0].weights[:,component]
+            return res
+        
+        if len(p) > len(act):
+            res = tf.matmul(p[-1].weights, self.d_dnn(x, p[:-1], act, component))
+        elif len(p) <= len(act):
+            res = tf.matmul(self.d_dnn(x, p, act[:-1], component), act[-1]['df'](self.dnn(x, p, act[:-1])))
+
+        return res
 
     def dd_dnn(self, x, p, act, component):
         pass
