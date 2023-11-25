@@ -94,10 +94,10 @@ class DeepNeuralNetwork:
 
         model.add(keras.layers.Dense(self.neuron_num_per_layer, activation=act[0]['f'], input_shape=(1,)))
 
-        for i in range(self.layer_size - 2):
-            model.add(keras.layers.Dense(self.neuron_num_per_layer, activation=act[i+1]['f']))
+        for i in range(1, self.layer_size - 2):
+            model.add(keras.layers.Dense(self.neuron_num_per_layer, activation=act[i]['f']))
 
-        model.add(keras.layers.Dense(1, activation=act[len(p)-1]['f']))
+        model.add(keras.layers.Dense(1, activation=act[-1]['f']))
         x = model(x)
         
         return x
