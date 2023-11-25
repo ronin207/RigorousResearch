@@ -223,6 +223,4 @@ if __name__ == "__main__":
     activation_fn = [{'f': tf.sin, 'df': tf.cos, 'ddf': lambda x: -tf.sin(x)} for _ in range(dnn.layer_size - 1)]
     parameters = dnn.initialise_weights(neuron_num_per_layer, layer_size)
 
-    print(parameters)
-
     iteration, ave_grad, ave_sqgrad = dnn.initialise_variables()
