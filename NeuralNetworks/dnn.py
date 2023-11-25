@@ -53,8 +53,8 @@ class DeepNeuralNetwork:
         weights (tf.Variable): initialised weights
     """
     def initialise_he(self, size, num_inputs):
-        weights = tf.random.truncated_normal(size, stddev=tf.sqrt(2/num_inputs))
-        return tf.convert_to_tensors(weights, dtype=tf.float32)
+        weights = tf.random.normal(size, stddev=tf.sqrt(2/num_inputs))
+        return tf.convert_to_tensor(weights, dtype=tf.float32)
     
     """
     DNN weights are initialised using the He initialisation method.
