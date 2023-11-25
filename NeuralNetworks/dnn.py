@@ -126,8 +126,30 @@ class DeepNeuralNetwork:
 
         return res
 
+    """
+    Computes the second derivative of the DNN output with respect to a specified component of the input.
+
+    Parameters:
+        x (tf.Tensor): input
+        p (list): DNN parameters
+        act (list): activation function for each layer
+        component (int): component of the input to compute the derivative with respect to
+
+    Returns:
+        dd (tf.Tensor): second derivative of the DNN output with respect to a specified component of the input
+    """
     def dd_dnn(self, x, p, act, component):
-        pass
+        if not act and len(p) == 1:
+            res = tf.constant(0, dtype=tf.float32)
+            return res
+
+        if len(p) > len(act):
+            res = tf.matmul(p[-1].weights, self.dd_dnn(x, p[:-1], act, component))
+        elif len(p) <= len(act):
+            res = tf.matmul(act[-1]['ddf'](self.dnn(x, p, act[:-1])), tf.square(self.d_dnn(x, p, act[:-1], component))) \
+                + act[-1]['df'](self.dnn(x, p, act[:-1])) * self.dd_dnn(x, p, act[:-1], component)
+
+        return res
 
     @tf.function
     def model_grad(self, x, parameters, act):
